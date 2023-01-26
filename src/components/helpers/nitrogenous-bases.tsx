@@ -5,7 +5,7 @@ interface ConversionObject {
 }
 
 const conversions: ConversionObject = {
-  A: 'U',
+  A: 'T',
   T: 'A',
   G: 'C',
   C: 'G',
@@ -18,7 +18,7 @@ const conversionsRegExp = new RegExp(
 
 type Props = {};
 
-const MRNATranscriptionHelper: Component<Props> = (props) => {
+const NitrogenousBasesHelper: Component<Props> = (props) => {
   const [value, setValue] = createSignal('');
   const [result, setResult] = createSignal('');
 
@@ -59,4 +59,4 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
   );
 };
 
-export default MRNATranscriptionHelper;
+export default NitrogenousBasesHelper;

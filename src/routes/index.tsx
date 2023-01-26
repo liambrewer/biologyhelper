@@ -8,6 +8,11 @@ export default function Home() {
           mRNA Transcription
         </A>
       </li>
+      <li>
+        <A href='/nitrogenous-bases' class='text-blue-500 hover:underline'>
+          Nitrogenous Bases
+        </A>
+      </li>
     </ul>
   );
 }
