@@ -11,11 +11,22 @@ const conversions: ConversionObject = {
   C: 'G',
 };
 
+const conversionsRegExp = new RegExp(
+  `[^${Object.keys(conversions).join('')}]`,
+  'gi'
+);
+
+console.log(conversionsRegExp.source);
+
 type Props = {};
 
 const MRNATranscriptionHelper: Component<Props> = (props) => {
   const [value, setValue] = createSignal('');
   const [result, setResult] = createSignal('');
+
+  createEffect(() => {
+    console.log(value());
+  });
 
   createEffect(() => {
     setResult(() => {
@@ -27,13 +38,23 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
     });
   });
 
+  const handleInput = (
+    e: InputEvent & {
+      currentTarget: HTMLInputElement;
+      target: Element;
+    }
+  ) => {
+    setValue(e.currentTarget.value.replace(conversionsRegExp, ''));
+    e.currentTarget.value = value();
+  };
+
   return (
     <>
       <input
         class='border-2'
         type='text'
         value={value()}
-        oninput={(e) => setValue((e.target as HTMLInputElement).value)}
+        oninput={(e) => handleInput(e)}
       />
       <p>{result()}</p>
     </>

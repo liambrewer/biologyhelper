@@ -1,5 +1,13 @@
-import MRNATranscriptionHelper from '~/components/helpers/mrna-transcription';
+import { A } from 'solid-start';
 
 export default function Home() {
-  return <MRNATranscriptionHelper />;
+  return (
+    <ul>
+      <li>
+        <A href='/mrna-transcription' class='text-blue-500 hover:underline'>
+          mRNA Transcription
+        </A>
+      </li>
+    </ul>
+  );
 }
