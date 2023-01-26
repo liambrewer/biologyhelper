@@ -2504,7 +2504,14 @@ sirv@^2.0.2:
     mrmime "^1.0.0"
     totalist "^3.0.0"
 
-solid-js@^1.6.9:
+solid-heroicons@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/solid-heroicons/-/solid-heroicons-3.1.1.tgz#95f47424b246017acc4297cad4a1cc39ef384673"
+  integrity sha512-wfU/SqxqxWxInvfFlKJfCBPnJ94Zq1GQFiFL3M0KwZzT81lSF5yIC4HA/Czp3DYrn+dUumjO0qdrx8Ab3cy2sA==
+  dependencies:
+    solid-js "^1.6.2"
+
+solid-js@^1.6.2, solid-js@^1.6.9:
   version "1.6.9"
   resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.6.9.tgz#98dc71f1bacf9e6efe771cf47c0d023e5bd892ed"
   integrity sha512-kV3fMmm+1C2J95c8eDOPKGfZHnuAkHUBLG4hX1Xu08bXeAIPqmxuz/QdH3B8SIdTp3EatBVIyA6RCes3hrGzpg==

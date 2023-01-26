@@ -12,6 +12,7 @@ import {
   Scripts,
   Title,
 } from 'solid-start';
+import Navbar from './components/layout/navbar';
 import './root.css';
 
 export default function Root() {
@@ -34,6 +35,7 @@ export default function Root() {
         ></Link>
       </Head>
       <Body>
+        <Navbar />
         <Suspense>
           <ErrorBoundary>
             <Routes>
