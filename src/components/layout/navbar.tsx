@@ -22,10 +22,10 @@ const links: NavLink[] = [
 
 const Navbar: Component = (props) => {
   return (
-    <nav class='h-16 w-screen bg-green-500 text-white'>
+    <nav class='h-16 w-full bg-green-500 text-white'>
       <div class='container mx-auto flex h-full flex-row items-center'>
         <h3 class='select-none text-3xl font-bold'>Biology Helper</h3>
-        <div class='ml-4 flex flex-row'>
+        <div class='ml-4 flex select-none flex-row'>
           <For each={links}>
             {(link) => (
               <A

@@ -32,6 +32,8 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
 
   const [converted, setConverted] = createSignal<Converted[]>([]);
 
+  const [copied, setCopied] = createSignal(false);
+
   createEffect(() => {
     setConverted([
       ...value()
@@ -50,7 +52,9 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
       target: Element;
     }
   ) => {
-    setValue(e.currentTarget.value.replace(conversionsRegExp, ''));
+    setValue(
+      e.currentTarget.value.replace(conversionsRegExp, '').toUpperCase()
+    );
     e.currentTarget.value = value();
   };
 
@@ -58,7 +62,19 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
     setValue('');
   };
 
-  const handleCopy = () => {};
+  const handleCopy = () => {
+    const text = converted()
+      .map((conversion) => conversion.to)
+      .join('');
+
+    navigator.clipboard.writeText(text);
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
+  };
 
   return (
     <div class='flex flex-col space-y-2'>
@@ -68,6 +84,7 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
           value={value()}
           oninput={(e) => handleInput(e)}
           placeholder='ATGC'
+          spellcheck={false}
         />
         <Button onclick={handleClear} disabled={value() === ''}>
           Clear
@@ -76,18 +93,28 @@ const MRNATranscriptionHelper: Component<Props> = (props) => {
       <div class='flex flex-row items-center space-x-2'>
         <h4 class='text-lg font-semibold'>Output</h4>
         <Show when={converted().length > 0}>
-          <p
-            class='text-sm text-gray-500 hover:cursor-pointer hover:underline'
-            onclick={handleCopy}
-          >
-            Copy result to clipboard
-          </p>
+          <div class='text-sm'>
+            <Show
+              when={copied()}
+              fallback={
+                <p
+                  class='text-gray-500 hover:cursor-pointer hover:underline'
+                  onclick={handleCopy}
+                  role='button'
+                >
+                  Copy result to clipboard
+                </p>
+              }
+            >
+              <p class='text-green-500'>Copied!</p>
+            </Show>
+          </div>
         </Show>
       </div>
-      <div class='flex flex-row space-x-0.5'>
+      <div class='flex flex-row flex-wrap gap-y-2 divide-x'>
         <For each={converted()}>
           {(conversion) => (
-            <div class='flex flex-col text-xl'>
+            <div class='flex flex-col items-center bg-gray-100 px-2 py-0.5 text-center text-xl first:rounded-l-lg last:rounded-r-lg'>
               <span class='select-none'>{conversion.from}</span>
               <Icon path={arrowDown} class='w-4' />
               <span>{conversion.to}</span>

@@ -12,6 +12,7 @@ import {
   Scripts,
   Title,
 } from 'solid-start';
+import Footer from './components/layout/footer';
 import Navbar from './components/layout/navbar';
 import './root.css';
 
@@ -35,15 +36,18 @@ export default function Root() {
         ></Link>
       </Head>
       <Body>
-        <Navbar />
-        <Suspense>
-          <ErrorBoundary>
-            <Routes>
-              <FileRoutes />
-            </Routes>
-          </ErrorBoundary>
-        </Suspense>
+        <div class='min-h-screen'>
+          <Navbar />
+          <Suspense>
+            <ErrorBoundary>
+              <Routes>
+                <FileRoutes />
+              </Routes>
+            </ErrorBoundary>
+          </Suspense>
+        </div>
         <Scripts />
+        <Footer />
       </Body>
     </Html>
   );
