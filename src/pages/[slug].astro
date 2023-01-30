@@ -1,0 +1,28 @@
+---
+import { getCollection, CollectionEntry } from 'astro:content';
+import HelperLayout from '../layouts/helper/HelperLayout.astro';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const helpers = await getCollection('helpers');
+
+  return helpers.map((helper) => ({
+    params: { slug: helper.slug },
+    props: { helper },
+  }));
+}
+
+interface Props {
+  helper: CollectionEntry<'helpers'>;
+}
+
+const { helper } = Astro.props;
+
+const Content = (await helper.render()).Content;
+---
+
+<Layout title={helper.data.title}>
+  <HelperLayout title={helper.data.title}>
+    <Content />
+  </HelperLayout>
+</Layout>

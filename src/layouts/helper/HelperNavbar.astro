@@ -7,13 +7,13 @@ interface Props {
 
 const { title } = Astro.props;
 
-const pathname = new URL(Astro.request.url).pathname;
+const href = new URL(Astro.request.url).href;
 ---
 
 <nav class='h-10 w-full border-b bg-gray-50'>
   <div class='container mx-auto flex h-full w-full flex-row items-center'>
     <h3 class='text-xl'>{title}</h3>
     <div class='flex-grow'></div>
-    <CopyLink link={pathname} client:load />
+    <CopyLink link={href} client:load />
   </div>
 </nav>

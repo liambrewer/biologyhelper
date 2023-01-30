@@ -1,5 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import HelpersList from '../components/helpers-list';
+
+const helpers = await getCollection('helpers');
 ---
 
-<Layout title='Home'>Biology Helper</Layout>
+<Layout title='Home'>
+  <HelpersList helpers={helpers} />
+</Layout>
