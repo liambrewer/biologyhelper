@@ -1,32 +1,37 @@
 import { Icon } from 'solid-heroicons';
 import { arrowDown } from 'solid-heroicons/solid';
 import { Component, createEffect, createSignal, For, Show } from 'solid-js';
-import Button from '../../ui/button';
-import TextInput from '../../ui/text-input';
+import Button from '../ui/button';
+import TextInput from '../ui/text-input';
 
-export interface CharConversions {
+interface ConversionObject {
   [key: string]: string;
 }
 
-interface CharConverted {
-  from: string;
-  to: string;
-}
-
-type Props = {
-  conversions: CharConversions;
+const conversions: ConversionObject = {
+  A: 'U',
+  T: 'A',
+  G: 'C',
+  C: 'G',
 };
 
-const CharConverterSharedHelper: Component<Props> = (props) => {
-  const conversionKeys = Object.keys(props.conversions).join('');
+const conversionsRegExp = new RegExp(
+  `[^${Object.keys(conversions).join('')}]`,
+  'gi'
+);
 
-  const conversionsRegExp = new RegExp(
-    `[^${conversionKeys.toUpperCase()}]`,
-    'gi'
-  );
+type Props = {};
 
+const MRNATranscriptionHelper: Component<Props> = (props) => {
   const [value, setValue] = createSignal('');
-  const [converted, setConverted] = createSignal<CharConverted[]>([]);
+
+  interface Converted {
+    from: string;
+    to: string;
+  }
+
+  const [converted, setConverted] = createSignal<Converted[]>([]);
+
   const [copied, setCopied] = createSignal(false);
 
   createEffect(() => {
@@ -34,9 +39,9 @@ const CharConverterSharedHelper: Component<Props> = (props) => {
       ...value()
         .toUpperCase()
         .split('')
-        .map<CharConverted>((char) => ({
+        .map<Converted>((char) => ({
           from: char,
-          to: props.conversions[char],
+          to: conversions[char],
         })),
     ]);
   });
@@ -78,7 +83,7 @@ const CharConverterSharedHelper: Component<Props> = (props) => {
         <TextInput
           value={value()}
           oninput={(e) => handleInput(e)}
-          placeholder={conversionKeys.toUpperCase()}
+          placeholder='ATGC'
           spellcheck={false}
         />
         <Button onclick={handleClear} disabled={value() === ''}>
@@ -121,4 +126,4 @@ const CharConverterSharedHelper: Component<Props> = (props) => {
   );
 };
 
-export default CharConverterSharedHelper;
+export default MRNATranscriptionHelper;

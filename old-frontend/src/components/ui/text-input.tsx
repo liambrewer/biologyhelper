@@ -1,4 +1,4 @@
-import type { JSX, Component } from 'solid-js';
+import { JSX, Component } from 'solid-js';
 
 type Props = Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'type'>;
 

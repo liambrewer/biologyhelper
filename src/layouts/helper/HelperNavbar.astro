@@ -1,0 +1,19 @@
+---
+import CopyLink from './copy-link';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<nav class='h-10 w-full border-b bg-gray-50'>
+  <div class='container mx-auto flex h-full w-full flex-row items-center'>
+    <h3 class='text-xl'>{title}</h3>
+    <div class='flex-grow'></div>
+    <CopyLink link={pathname} client:load />
+  </div>
+</nav>

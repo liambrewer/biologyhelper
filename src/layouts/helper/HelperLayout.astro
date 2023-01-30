@@ -1,0 +1,12 @@
+---
+import HelperNavbar from './HelperNavbar.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<HelperNavbar title={title} />
+<main class='container mx-auto flex flex-col pt-2'><slot /></main>

@@ -1,4 +1,4 @@
-import type { JSX, ParentComponent } from 'solid-js';
+import { JSX, ParentComponent } from 'solid-js';
 
 type Props = JSX.ButtonHTMLAttributes<HTMLButtonElement>;
 

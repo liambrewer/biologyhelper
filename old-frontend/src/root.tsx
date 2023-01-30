@@ -36,7 +36,7 @@ export default function Root() {
         ></Link>
       </Head>
       <Body>
-        <div class='flex min-h-screen flex-col'>
+        <div class='min-h-screen'>
           <Navbar />
           <Suspense>
             <ErrorBoundary>
